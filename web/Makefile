@@ -7,7 +7,7 @@ all: deploy
 
 .PHONY: run
 dev:
-	python manage.py runserver
+	honcho run -e .env python manage.py runserver
 
 #-------------
 # Docker commands
