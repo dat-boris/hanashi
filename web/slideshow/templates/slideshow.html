@@ -11,6 +11,8 @@
     <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
     <input id="chat-message-input" type="text" size="100"/><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
+
+    <div id='root'></div>
 </body>
 <script>
     var roomName = {{ room_name_json }};
@@ -46,4 +48,9 @@
         messageInputDom.value = '';
     };
 </script>
+
+<script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js'></script>
+<script src='{% static 'slideshow/app.js' %}'></script>
+
 </html>

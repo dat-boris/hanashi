@@ -78,5 +78,6 @@ create-bucket:
 .PHONY: collectstatic
 collectstatic:
 	python manage.py collectstatic --no-input
+	babel --presets react -x ".jsx" static/slideshow/app.jsx > static/slideshow/app.js
 	gsutil rsync -R static/ gs://$(GCLOUD_PROJECT)/static
 	gsutil acl ch -r -u AllUsers:R gs://$(GCLOUD_PROJECT)

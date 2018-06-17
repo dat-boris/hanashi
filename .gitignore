@@ -105,3 +105,4 @@ venv.bak/
 
 # static files
 web/static
+web/node_modules
