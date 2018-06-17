@@ -25,7 +25,10 @@ SECRET_KEY = 'ddj9d(!ank4wjo0mkaw04z-i9nmvl-g&viv30^fjuwxq^akbbx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: If you deploy a Django app to production, make sure to set
+# an appropriate host here.
+# See https://docs.djangoproject.com/en/1.10/ref/settings/
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
