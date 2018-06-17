@@ -17,6 +17,7 @@
 <script>
     var roomName = {{ room_name_json }};
 
+    /*
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +
         '/ws/s/' + roomName + '/');
@@ -47,10 +48,11 @@
 
         messageInputDom.value = '';
     };
+    */
 </script>
 
 <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js'></script>
-<script src='{% static 'slideshow/app.js' %}?170107'></script>
+<script src='{% static 'slideshow/app.js' %}?170112'></script>
 
 </html>
