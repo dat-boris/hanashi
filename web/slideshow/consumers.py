@@ -25,7 +25,7 @@ class SlideshowConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         # message = text_data_json['message']
-        print("receive: {}".format(text_data), file=sys.stderr)
+        print("[WS] receive: {}".format(text_data), file=sys.stderr)
         data_json = json.loads(text_data)
 
         # Send message to room group
@@ -39,7 +39,7 @@ class SlideshowConsumer(AsyncWebsocketConsumer):
 
     # Receive message from room group
     async def change_image(self, event):
-        print("change_image: {}".format(event), file=sys.stderr)
+        print("[WS] change_image: {}".format(event), file=sys.stderr)
         payload = event['payload']
 
         # Send message to WebSocket

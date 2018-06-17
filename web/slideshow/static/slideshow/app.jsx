@@ -25,8 +25,7 @@ class Slideshow extends React.Component {
     const self = this;
     this.socket.onmessage = function(e) {
       const data = JSON.parse(e.data);
-      console.log('Received message:', data);
-      // document.querySelector('#chat-log').value += (message + '\n');
+      console.log('[WS] Received message:', data);
       self.setState(data);
     };
   }
