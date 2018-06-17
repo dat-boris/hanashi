@@ -5,6 +5,10 @@ ZONE=us-central1-b
 .PHONY: all
 all: deploy
 
+.PHONY: run
+dev:
+	python manage.py runserver
+
 #-------------
 # Docker commands
 #-------------
