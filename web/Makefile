@@ -74,3 +74,9 @@ delete:
 create-bucket:
 	gsutil mb gs://$(GCLOUD_PROJECT)
     gsutil defacl set public-read gs://$(GCLOUD_PROJECT)
+
+.PHONY: collectstatic
+collectstatic:
+	python manage.py collectstatic --no-input
+	gsutil rsync -R static/ gs://$(GCLOUD_PROJECT)/static
+	gsutil acl ch -r -u AllUsers:R gs://$(GCLOUD_PROJECT)
