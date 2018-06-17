@@ -1,7 +1,8 @@
+import sys
 import json
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer
 
-class SlideshowConsumer(WebsocketConsumer):
+class SlideshowConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['name']
         self.room_group_name = 'room_%s' % self.room_name
@@ -12,7 +13,7 @@ class SlideshowConsumer(WebsocketConsumer):
             self.channel_name
         )
 
-        self.accept()
+        await self.accept()
 
     async def disconnect(self, close_code):
         # Leave room group
@@ -24,7 +25,7 @@ class SlideshowConsumer(WebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         # message = text_data_json['message']
-        print("receive: {}".format(text_data))
+        print("receive: {}".format(text_data), file=sys.stderr)
         data_json = json.loads(text_data)
 
         # Send message to room group
@@ -38,7 +39,7 @@ class SlideshowConsumer(WebsocketConsumer):
 
     # Receive message from room group
     async def change_image(self, event):
-        print("change_image: {}".format(event))
+        print("change_image: {}".format(event), file=sys.stderr)
         payload = event['payload']
 
         # Send message to WebSocket
