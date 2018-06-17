@@ -40,8 +40,7 @@ create-cluster:
 .PHONY: create-secret
 create-secret:
 	kubectl delete secret django-env || true
-	# cat .env | sed "s/^/--from-literal=/" | xargs kubectl create secret generic django-env
-	kubectl create secret generic django-env --from-file=.env
+	cat .env | sed "s/^/--from-literal=/" | xargs kubectl create secret generic django-env
 	kubectl describe secrets/django-env
 
 .PHONY: deploy
