@@ -1,46 +1,45 @@
 import json
-from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 
 class SlideshowConsumer(WebsocketConsumer):
-    def connect(self):
+    async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['name']
-        self.room_group_name = 'chat_%s' % self.room_name
+        self.room_group_name = 'room_%s' % self.room_name
 
         # Join room group
-        async_to_sync(self.channel_layer.group_add)(
+        await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name
         )
 
         self.accept()
 
-    def disconnect(self, close_code):
+    async def disconnect(self, close_code):
         # Leave room group
-        async_to_sync(self.channel_layer.group_discard)(
+        await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
         )
 
     # Receive message from WebSocket
-    def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
+    async def receive(self, text_data):
+        # message = text_data_json['message']
+        print("receive: {}".format(text_data))
+        data_json = json.loads(text_data)
 
         # Send message to room group
-        async_to_sync(self.channel_layer.group_send)(
+        await self.channel_layer.group_send(
             self.room_group_name,
             {
-                'type': 'chat_message',
-                'message': message
+                'type': 'change_image',
+                'payload': data_json
             }
         )
 
     # Receive message from room group
-    def chat_message(self, event):
-        message = event['message']
+    async def change_image(self, event):
+        print("change_image: {}".format(event))
+        payload = event['payload']
 
         # Send message to WebSocket
-        self.send(text_data=json.dumps({
-            'message': message
-        }))
+        await self.send(text_data=json.dumps(payload))
