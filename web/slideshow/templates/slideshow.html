@@ -53,11 +53,28 @@
     */
 </script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/instafeed.js/1.4.1/instafeed.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/instafeed.js/1.4.1/instafeed.min.js"></script> -->
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<!-- <script src="https://raw.githubusercontent.com/AndyTek/instafetch/hotfix/instafetch.js"></script> -->
+<script src="{% static 'lib/instafetch.js' %}?4"></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js'></script>
 
 <script type="text/javascript">
+    function displayInstaBlocks(data) {
+        debugger;
+    }
+
+    var fetcher = new Instafetch('8012670664.80570e8.40cc7a9a26ed42fbb6feba8ef503b516'); // Get instance of fetch with Client ID
+    fetcher.fetch({                                                   // Fetch results
+        user: 8012670664,                                                // User ID
+        // tag: 'mytourdejapan',                                                    // Tag name
+        limit: 88,                                                      // How many to fetch
+        callback: displayInstaBlocks,                                   // pass in your callback...
+        params: '9gagBlock'                                           // ...with a parameter
+    });
+
+    /*
     var feed = new Instafeed({
         get: 'user',
         userId: '8012670664',
@@ -70,6 +87,7 @@
         // accessToken: '8012670664.1677ed0.c3b12a0c7f0342899d081905c0a7d498'
     });
     feed.run();
+    */
 </script>
 
 <script src='{% static 'slideshow/app.js' %}?170113'></script>
