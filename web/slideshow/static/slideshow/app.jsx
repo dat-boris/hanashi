@@ -9,19 +9,22 @@ class Slideshow extends React.Component {
     this.state = {
       value: 1,
     };
+  }
 
+  componentDidMount(){
+    const self = this;
     chatSocket.onmessage = function(e) {
-        // var data = JSON.parse(e.data);
-        // var message = data['message'];
-        // document.querySelector('#chat-log').value += (message + '\n');
-        this.setState({ value: this.state.value + 1 })
+      var data = JSON.parse(e.data);
+      var message = data['message'];
+      // document.querySelector('#chat-log').value += (message + '\n');
+      self.setState({ value: message })
     };
   }
 
   render() {
     return (
       <div className="usercount">
-        <div>Number of users:</div>
+        <div>Last message:</div>
         <div>{this.state.value}</div>
       </div>
     );
