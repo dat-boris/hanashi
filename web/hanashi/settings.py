@@ -129,3 +129,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 ASGI_APPLICATION = 'hanashi.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            # https://github.com/django/channels/issues/164
+            "hosts": ['redis://:{password}@{host}:6379/0'.format(
+                host=os.getenv('REDIS_HOST'),
+                password=os.getenv('REDIS_PASSWORD')
+                )
+            ],
+        },
+    },
+}
