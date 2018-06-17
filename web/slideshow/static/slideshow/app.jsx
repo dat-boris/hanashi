@@ -1,9 +1,20 @@
+var chatSocket = new WebSocket(
+  'ws://' + window.location.host +
+  '/ws/s/test/');
+
 class Slideshow extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       value: 1,
+    };
+
+    chatSocket.onmessage = function(e) {
+        // var data = JSON.parse(e.data);
+        // var message = data['message'];
+        // document.querySelector('#chat-log').value += (message + '\n');
+        this.setState({ value: this.state.value + 1 })
     };
   }
 
