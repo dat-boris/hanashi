@@ -6,44 +6,21 @@
     <meta charset="utf-8"/>
     <title>Slideshow</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'slideshow/css/main.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'slideshow/css/main.css' %}?131" />
 </head>
 <body>
     <div id='root'></div>
-
-    <div id="photos"></div>
-
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="{% static 'slideshow/js/main.js' %}"></script>
+    <script>
+      // These are custom variables passed in from django - see /web/slideshow/templates/slideshow.html
+      var HANASHI = {
+        'API_KEY' : 'a50a9efb7526801d189cf59e5f77b8d4',
+        'USER_ID' : '85734830@N00',
+        'GALLERY_ID': '72157668589896064',
+        'WEB_SOCKET_HOST': window.host,
+        'ROOM_NAME': 'test_domain'
+      };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.js"></script>
+    <script type="text/javascript" src="{% static 'slideshow/js/main.js' %}?131"></script>
 </body>
-
-<script>
-    var roomName = {{ room_name_json }};
-
-    // API explorer: https://www.flickr.com/services/api/explore/flickr.photosets.getPhotos
-    $.getJSON(
-        "http://api.flickr.com/services/rest/?jsoncallback=?",
-        {
-            'method': 'flickr.photosets.getPhotos',
-            'api_key': 'a50a9efb7526801d189cf59e5f77b8d4',
-            'user_id': '85734830@N00',
-            'photoset_id': '72157668589896064',
-            'extras': 'url_s',
-            'format': 'json'
-        },
-        function (data) {
-            if (data.stat == 'fail') {
-                throw `Error: ${data.message}`
-            }
-            var list = $("<ul></ul>");
-            $.each(data.photoset.photo, function (i, p) {
-                var link = $("<img/>").attr("src", p.url_s);
-                var li = $("<li/>").append(link);
-                $(list).append(li);
-            });
-            $("#photos").append(list);
-        }
-    );
-</script>
-
 </html>

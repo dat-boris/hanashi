@@ -1,22 +1,23 @@
-/* global HANASHI */
+/* global HANASHI $ */
 
 import React, { Component } from 'react';
 import './App.css';
 
-const IMAGE_LIST = [
-  'https://farm9.staticflickr.com/8739/28541841135_1663697a8f_m.jpg',
-  'https://farm9.staticflickr.com/8844/28257961940_771f24dca4_m.jpg',
-  'https://farm9.staticflickr.com/8846/28257966570_98c0f49207_m.jpg'
-]
+// const IMAGE_LIST = [
+//   'https://farm9.staticflickr.com/8739/28541841135_1663697a8f_m.jpg',
+//   'https://farm9.staticflickr.com/8844/28257961940_771f24dca4_m.jpg',
+//   'https://farm9.staticflickr.com/8846/28257966570_98c0f49207_m.jpg'
+// ]
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      currentImageSRC: IMAGE_LIST[0],
-      totalImageCount: IMAGE_LIST.length,
-      curentImagePosition: 0
+      currentImageSRC: 0,
+      totalImageCount: 0,
+      curentImagePosition: 0,
+      imageList: []
     };
 
     this.toNextImage = this.toNextImage.bind(this);
@@ -29,6 +30,33 @@ class App extends Component {
 
   componentDidMount(){
     const self = this;
+
+    // load images
+    // API explorer: https://www.flickr.com/services/api/explore/flickr.photosets.getPhotos
+    $.getJSON(
+        'http://api.flickr.com/services/rest/?jsoncallback=?',
+        {
+            'method': 'flickr.photosets.getPhotos',
+            'api_key': HANASHI.API_KEY,
+            'user_id': HANASHI.USER_ID,
+            'photoset_id': HANASHI.GALLERY_ID,
+            'extras': 'url_m',
+            'format': 'json'
+        },
+        (data) => {
+          if (data.stat == 'fail') {
+            throw `Error: ${data.message}`
+          }
+
+          const photoURLs = data.photoset.photo.map((p) => p.url_m);
+          self.setState({
+            imageList: photoURLs,
+            totalImageCount: photoURLs.length,
+            currentImageSRC: photoURLs[this.state.curentImagePosition]
+          });
+        }
+      );
+
     this.socket.onmessage = function(e) {
       const data = JSON.parse(e.data);
       console.log('[WS] Received message:', data);
@@ -37,18 +65,21 @@ class App extends Component {
   }
 
   toNextImage(){
-    const newPosition = (this.state.curentImagePosition + 1) % IMAGE_LIST.length;
+    const newPosition = (this.state.curentImagePosition + 1) % this.state.totalImageCount;
     this._sendUpdateState(newPosition);
   }
 
   toPreviousImage(){
-    const newPosition = (IMAGE_LIST.length + this.state.curentImagePosition - 1) % IMAGE_LIST.length;
+    const newPosition = (
+      (this.state.totalImageCount + this.state.curentImagePosition - 1)
+      % this.state.totalImageCount
+    );
     this._sendUpdateState(newPosition);
   }
 
   _sendUpdateState(newPosition){
     const newState = {
-      currentImageSRC: IMAGE_LIST[newPosition],
+      currentImageSRC: this.state.imageList[newPosition],
       curentImagePosition: newPosition
     };
     this.setState(newState);
