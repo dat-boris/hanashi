@@ -5,6 +5,16 @@ import './App.css';
 
 import QRCode from 'qrcode.react';
 
+class ShareQRCode extends Component {
+  render() {
+    return (
+      <div className="qrcode-expand">
+        <QRCode value={window.location.href} size={256}/>
+      </div>
+    )
+  }
+}
+
 class App extends Component {
 
   constructor(props) {
@@ -13,11 +23,13 @@ class App extends Component {
       currentImageSRC: '',
       totalImageCount: 0,
       curentImagePosition: 0,
-      imageList: []
+      imageList: [],
+      isShowQR: false
     };
 
     this.toNextImage = this.toNextImage.bind(this);
     this.toPreviousImage = this.toPreviousImage.bind(this);
+    this.toggleQRcode = this.toggleQRcode.bind(this);
 
     this.socket = new WebSocket(
       `ws://${HANASHI.WEB_SOCKET_HOST}/ws/s/test/`
@@ -73,6 +85,10 @@ class App extends Component {
     this._sendUpdateState(newPosition);
   }
 
+  toggleQRcode(){
+    this.setState({isShowQR: this.state.isShowQR ? '' : true})
+  }
+
   _sendUpdateState(newPosition){
     const newState = {
       currentImageSRC: this.state.imageList[newPosition],
@@ -85,9 +101,11 @@ class App extends Component {
   render() {
     return (
       <div className="slideshow">
-        <div class="qrcode">
-          <QRCode value={window.location.href} size="256"/>
+        <div onClick={this.toggleQRcode} className="share-widget">
+          <i className="fas fa-qrcode"></i>
         </div>
+        {this.state.isShowQR && <div onClick={this.toggleQRcode}><ShareQRCode/></div> }
+
         <div onClick={this.toPreviousImage} className="scroll-left scroll-button blackshadow">
           <i className="fas fa-caret-left"></i>
         </div>

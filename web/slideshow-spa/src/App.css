@@ -62,12 +62,22 @@
 }
 
 /**
- * Other
+ * QRCode
  */
-.qrcode {
+.share-widget {
   position: absolute;
   top: 10%;
   left: 10%;
+
+  font-size: 32px;
+}
+
+.qrcode-expand {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+
+  z-index: 10;
 
   padding: 30px;
   background-color: white;
