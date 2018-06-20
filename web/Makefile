@@ -75,9 +75,15 @@ create-bucket:
 	gsutil mb gs://$(GCLOUD_PROJECT)
     gsutil defacl set public-read gs://$(GCLOUD_PROJECT)
 
+slideshow-spa/build:
+	cd slideshow-spa; yarn build && yarn build-rename
+
 .PHONY: collectstatic
-collectstatic:
+collectstatic: slideshow-spa/build
 	python manage.py collectstatic --no-input
-	babel --presets react -x ".jsx" static/slideshow/app.jsx > static/slideshow/app.js
+
+build-deploy-spa: collectstatic slideshow-spa/build
+	cp -rf slideshow-spa/build/static/js/ static/slideshow/js
+	cp -rf slideshow-spa/build/static/css static/slideshow/css
 	gsutil rsync -R static/ gs://$(GCLOUD_PROJECT)/static
 	gsutil acl ch -r -u AllUsers:R gs://$(GCLOUD_PROJECT)

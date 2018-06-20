@@ -5,59 +5,20 @@
 <head>
     <meta charset="utf-8"/>
     <title>Slideshow</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'slideshow/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'slideshow/css/main.css' %}" />
 </head>
 <body>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
-    <input id="chat-message-input" type="text" size="100"/><br/>
-    <input id="chat-message-submit" type="button" value="Send"/>
+    <div id='root'></div>
 
     <div id="photos"></div>
 
-    <div id='root'></div>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="{% static 'slideshow/js/main.js' %}"></script>
 </body>
+
 <script>
     var roomName = {{ room_name_json }};
 
-    /*
-    var chatSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/s/' + roomName + '/');
-
-    chatSocket.onmessage = function(e) {
-        var data = JSON.parse(e.data);
-        var message = data['message'];
-        document.querySelector('#chat-log').value += (message + '\n');
-    };
-
-    chatSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
-    };
-
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#chat-message-submit').click();
-        }
-    };
-
-    document.querySelector('#chat-message-submit').onclick = function(e) {
-        var messageInputDom = document.querySelector('#chat-message-input');
-        var message = messageInputDom.value;
-        chatSocket.send(JSON.stringify({
-            'message': message
-        }));
-
-        messageInputDom.value = '';
-    };
-    */
-</script>
-
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js'></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js'></script>
-
-<script type="text/javascript">
     // API explorer: https://www.flickr.com/services/api/explore/flickr.photosets.getPhotos
     $.getJSON(
         "http://api.flickr.com/services/rest/?jsoncallback=?",
@@ -83,7 +44,5 @@
         }
     );
 </script>
-
-<script src='{% static 'slideshow/app.js' %}?170113'></script>
 
 </html>
