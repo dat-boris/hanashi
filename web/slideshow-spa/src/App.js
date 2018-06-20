@@ -58,11 +58,19 @@ class App extends Component {
   render() {
     return (
       <div className="slideshow">
-        <img src={this.state.currentImageSRC}/>
-        <div>Image count:</div>
-        <div>{this.state.curentImagePosition + 1} / {this.state.totalImageCount}</div>
-        <a href="#" onClick={this.toNextImage}>&lt;</a>
-        <a href="#" onClick={this.toPreviousImage}>&gt;</a>
+        <div onClick={this.toPreviousImage} className="scroll-left scroll-button blackshadow">
+          <i class="fas fa-caret-left"></i>
+        </div>
+        <div className="image">
+          <img src={this.state.currentImageSRC}/>
+        </div>
+        <div onClick={this.toNextImage} className="scroll-right scroll-button blackshadow">
+          <i class="fas fa-caret-right"></i>
+        </div>
+        <div className="image-counter blackshadow">
+          <span className="major-count">{this.state.curentImagePosition + 1}</span>
+          <span>/ {this.state.totalImageCount}</span>
+        </div>
       </div>
     );
   }
