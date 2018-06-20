@@ -35,7 +35,7 @@
   top: 50%;
   position: absolute;
 
-  font-size: 45px;
+  font-size: 64px;
   cursor: pointer;
 }
 
@@ -54,8 +54,9 @@
   right: 10%;
   bottom: 10%;
   position: absolute;
+  font-size: 32px;
 }
 
 .major-count {
-  font-size: 32px;
+  font-size: 64px;
 }

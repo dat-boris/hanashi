@@ -90,13 +90,13 @@ class App extends Component {
     return (
       <div className="slideshow">
         <div onClick={this.toPreviousImage} className="scroll-left scroll-button blackshadow">
-          <i class="fas fa-caret-left"></i>
+          <i className="fas fa-caret-left"></i>
         </div>
         <div className="image">
           <img src={this.state.currentImageSRC}/>
         </div>
         <div onClick={this.toNextImage} className="scroll-right scroll-button blackshadow">
-          <i class="fas fa-caret-right"></i>
+          <i className="fas fa-caret-right"></i>
         </div>
         <div className="image-counter blackshadow">
           <span className="major-count">{this.state.curentImagePosition + 1}</span>
