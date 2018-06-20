@@ -6,11 +6,12 @@
 
 .slideshow {
   height: 100vh;
-  width: 100vw;
-  position: relative;
+  /* width: 100vw; */
+  /* position: relative; */
 
   background-color: black;
   color: white;
+  font-size: 6em;
 }
 
 .slideshow .image img {
@@ -32,10 +33,9 @@
  */
 
 .slideshow .scroll-button {
-  top: 50%;
-  position: absolute;
+  top: 50vw;
+  position: fixed;
 
-  font-size: 64px;
   cursor: pointer;
 }
 
@@ -51,31 +51,27 @@
  * Image counter
  */
 .image-counter {
-  right: 10%;
-  bottom: 10%;
-  position: absolute;
-  font-size: 32px;
+  right: 10vw;
+  bottom: 10vh;
+  position: fixed;
 }
 
 .image-counter .major-count {
-  font-size: 64px;
 }
 
 /**
  * QRCode
  */
 .share-widget {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-
-  font-size: 32px;
+  position: fixed;
+  top: 10vh;
+  left: 10vw;
 }
 
 .qrcode-expand {
-  position: absolute;
-  top: 10%;
-  left: 10%;
+  position: fixed;
+  top: 10vh;
+  left: 10vw;
 
   z-index: 10;
 

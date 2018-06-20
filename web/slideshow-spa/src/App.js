@@ -32,7 +32,7 @@ class App extends Component {
     this.toggleQRcode = this.toggleQRcode.bind(this);
 
     this.socket = new WebSocket(
-      `ws://${HANASHI.WEB_SOCKET_HOST}/ws/s/test/`
+      `ws://${HANASHI.WEB_SOCKET_HOST}/ws/s/${HANASHI.ROOM_NAME}/`
     )
   }
 

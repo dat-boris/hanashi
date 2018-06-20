@@ -25,7 +25,7 @@ DEFAULT_ID = 72157698195581705
 
 def slideshow(request, name=''):
     return render(request, 'slideshow.html', {
-        'room_name_json': mark_safe(json.dumps(name)),
+        'room_name': mark_safe(name),
         'epoch': time.time(),
-        'photosetID': PHOTOSET_ID.get(name, DEFAULT_ID)
+        'photoset_id': mark_safe(PHOTOSET_ID.get(name, DEFAULT_ID))
     })
