@@ -1,3 +1,6 @@
+slideshow-spa
+
+# https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/container_engine/django_tutorial/.dockerignore
 .dockerignore
 Dockerfile
 db.sqlite3
