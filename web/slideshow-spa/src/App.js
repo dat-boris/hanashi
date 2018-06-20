@@ -3,11 +3,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-// const IMAGE_LIST = [
-//   'https://farm9.staticflickr.com/8739/28541841135_1663697a8f_m.jpg',
-//   'https://farm9.staticflickr.com/8844/28257961940_771f24dca4_m.jpg',
-//   'https://farm9.staticflickr.com/8846/28257966570_98c0f49207_m.jpg'
-// ]
+import QRCode from 'qrcode.react';
 
 class App extends Component {
 
@@ -89,6 +85,9 @@ class App extends Component {
   render() {
     return (
       <div className="slideshow">
+        <div class="qrcode">
+          <QRCode value={window.location.href} size="256"/>
+        </div>
         <div onClick={this.toPreviousImage} className="scroll-left scroll-button blackshadow">
           <i className="fas fa-caret-left"></i>
         </div>

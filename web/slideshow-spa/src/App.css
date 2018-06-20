@@ -57,6 +57,19 @@
   font-size: 32px;
 }
 
-.major-count {
+.image-counter .major-count {
   font-size: 64px;
+}
+
+/**
+ * Other
+ */
+.qrcode {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+
+  padding: 30px;
+  background-color: white;
+  border-radius: 15px;
 }
