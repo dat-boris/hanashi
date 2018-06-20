@@ -28,8 +28,6 @@ hanashi   2         2         2            2           2d
 
 And to access the IP, uses:
 ```
-$
-
 # Get external IPs
 $ kubectl get service
 ```
