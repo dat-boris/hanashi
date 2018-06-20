@@ -12,7 +12,7 @@
     <input id="chat-message-input" type="text" size="100"/><br/>
     <input id="chat-message-submit" type="button" value="Send"/>
 
-    <div id="instafeed"></div>
+    <div id="photos"></div>
 
     <div id='root'></div>
 </body>
@@ -55,39 +55,34 @@
 
 <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/instafeed.js/1.4.1/instafeed.min.js"></script> -->
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<!-- <script src="https://raw.githubusercontent.com/AndyTek/instafetch/hotfix/instafetch.js"></script> -->
-<script src="{% static 'lib/instafetch.js' %}?4"></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-with-addons.js'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js'></script>
 
 <script type="text/javascript">
-    function displayInstaBlocks(data) {
-        debugger;
-    }
-
-    var fetcher = new Instafetch('8012670664.80570e8.40cc7a9a26ed42fbb6feba8ef503b516'); // Get instance of fetch with Client ID
-    fetcher.fetch({                                                   // Fetch results
-        user: 8012670664,                                                // User ID
-        // tag: 'mytourdejapan',                                                    // Tag name
-        limit: 88,                                                      // How many to fetch
-        callback: displayInstaBlocks,                                   // pass in your callback...
-        params: '9gagBlock'                                           // ...with a parameter
-    });
-
-    /*
-    var feed = new Instafeed({
-        get: 'user',
-        userId: '8012670664',
-        limit: 31,
-        sortBy: 'most-recent',
-        // tagName: 'mytourdejapan',
-        // simple hack from https://elfsight.com/blog/2016/05/how-to-get-instagram-access-token/
-        clientId: '80570e8bce81474784c09ac25a6172de',
-        accessToken: '8012670664.80570e8.40cc7a9a26ed42fbb6feba8ef503b516'
-        // accessToken: '8012670664.1677ed0.c3b12a0c7f0342899d081905c0a7d498'
-    });
-    feed.run();
-    */
+    // API explorer: https://www.flickr.com/services/api/explore/flickr.photosets.getPhotos
+    $.getJSON(
+        "http://api.flickr.com/services/rest/?jsoncallback=?",
+        {
+            'method': 'flickr.photosets.getPhotos',
+            'api_key': 'a50a9efb7526801d189cf59e5f77b8d4',
+            'user_id': '85734830@N00',
+            'photoset_id': '72157668589896064',
+            'extras': 'url_s',
+            'format': 'json'
+        },
+        function (data) {
+            if (data.stat == 'fail') {
+                throw `Error: ${data.message}`
+            }
+            var list = $("<ul></ul>");
+            $.each(data.photoset.photo, function (i, p) {
+                var link = $("<img/>").attr("src", p.url_s);
+                var li = $("<li/>").append(link);
+                $(list).append(li);
+            });
+            $("#photos").append(list);
+        }
+    );
 </script>
 
 <script src='{% static 'slideshow/app.js' %}?170113'></script>
