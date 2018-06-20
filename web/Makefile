@@ -82,6 +82,7 @@ slideshow-spa/build:
 collectstatic: slideshow-spa/build
 	python manage.py collectstatic --no-input
 
+.PHONY: build-deploy-spa
 build-deploy-spa: collectstatic slideshow-spa/build
 	cp -rf slideshow-spa/build/static/js/ static/slideshow/js
 	cp -rf slideshow-spa/build/static/css static/slideshow/css

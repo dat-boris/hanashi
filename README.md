@@ -24,14 +24,15 @@ A work in progress tutorial to [setup Django channel with GCE](https://docs.goog
 After the above setup, you can run:
 
 ```
-# Start with building required API
-push web/slidshow-spi
-yarn build
-
-# Collect static file
-popd; cd web
-make collectstatic
+cd web
+# Build SPA and Collect static file
+make build-deploy-spa
 
 # create development server
 make dev
 ```
+
+# Folder structure
+
+* [Django app](/web) is in the `/web`
+* [React SPA app used by slideshow](/web/slideshow-spa) is in `/web/slideshow-spa`
