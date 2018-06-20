@@ -32,6 +32,18 @@ make build-deploy-spa
 make dev
 ```
 
+Now you can go to http://localhost:8000 for your local server
+
+## Front-end development
+
+```
+cd web/slideshow-spa
+yarn start
+```
+
+Then you can go to http://localhost:3000 for a hot reload version of the front-end server.
+
+
 # Folder structure
 
 * [Django app](/web) is in the `/web`
