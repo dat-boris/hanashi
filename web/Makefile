@@ -83,8 +83,8 @@ build-spa:
 collectstatic:
 	python manage.py collectstatic --no-input
 
-.PHONY: build-deploy-spa
-build-deploy-spa: collectstatic build-spa
+.PHONY: spa
+spa: collectstatic build-spa
 	cp -rf slideshow-spa/build/static/js/ static/slideshow/js
 	cp -rf slideshow-spa/build/static/css/ static/slideshow/css
 	gsutil rsync -R static/ gs://$(GCLOUD_PROJECT)/static

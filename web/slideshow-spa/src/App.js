@@ -14,7 +14,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentImageSRC: 0,
+      currentImageSRC: '',
       totalImageCount: 0,
       curentImagePosition: 0,
       imageList: []
@@ -34,7 +34,7 @@ class App extends Component {
     // load images
     // API explorer: https://www.flickr.com/services/api/explore/flickr.photosets.getPhotos
     $.getJSON(
-        'http://api.flickr.com/services/rest/?jsoncallback=?',
+        'https://api.flickr.com/services/rest/?jsoncallback=?',
         {
             'method': 'flickr.photosets.getPhotos',
             'api_key': HANASHI.API_KEY,

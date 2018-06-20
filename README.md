@@ -26,7 +26,7 @@ After the above setup, you can run:
 ```
 cd web
 # Build SPA and Collect static file
-make build-deploy-spa
+make spa
 
 # create development server
 make dev
@@ -42,6 +42,24 @@ yarn start
 ```
 
 Then you can go to http://localhost:3000 for a hot reload version of the front-end server.
+
+## Deploying
+
+Once you have setup your [Kubernetes cluster on GCE](https://cloud.google.com/python/django/kubernetes-engine),
+you can deploy via:
+
+
+```
+# Build new docker image
+make build
+
+# Push docker image to Docker registry
+make push
+
+# Update kubernetes cluster
+make update
+```
+
 
 
 # Folder structure
