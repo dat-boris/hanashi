@@ -50,7 +50,7 @@ class App extends Component {
             'api_key': HANASHI.API_KEY,
             'user_id': HANASHI.USER_ID,
             'photoset_id': HANASHI.GALLERY_ID,
-            'extras': 'url_m',
+            'extras': 'url_m,url_o',
             'format': 'json'
         },
         (data) => {
@@ -58,7 +58,13 @@ class App extends Component {
             throw `Error: ${data.message}`
           }
 
-          const photoURLs = data.photoset.photo.map((p) => p.url_m);
+          // Flickr can't display gif properly.
+          // show original image if it is a GIF
+          const getImageURL = (p) => (
+            (p.url_o && p.url_o.endsWith('.gif')) ? p.url_o : p.url_m
+          );
+
+          const photoURLs = data.photoset.photo.map(getImageURL);
           self.setState({
             imageList: photoURLs,
             totalImageCount: photoURLs.length,
