@@ -113,25 +113,27 @@ class App extends Component {
   render() {
     return (
       <div className="slideshow">
-        <div onClick={this.toggleQRcode} className="share-widget">
-          <i className="fas fa-qrcode"></i>
-        </div>
-        {this.state.isShowQR && <div onClick={this.toggleQRcode}><ShareQRCode/></div> }
+        <div id="controls">
+          <div onClick={this.toggleQRcode} className="share-widget">
+            <i className="fas fa-qrcode"></i>
+          </div>
+          {this.state.isShowQR && <div onClick={this.toggleQRcode}><ShareQRCode/></div> }
 
-        <div onClick={this.toPreviousImage} className="scroll-left scroll-button blackshadow">
-          <i className="fas fa-caret-left"></i>
+          <div onClick={this.toPreviousImage} className="scroll-left scroll-button blackshadow">
+            <i className="fas fa-caret-left"></i>
+          </div>
+          <div onClick={this.toNextImage} className="scroll-right scroll-button blackshadow">
+            <i className="fas fa-caret-right"></i>
+          </div>
+          <div className="image-counter blackshadow">
+            <span className="major-count">{this.state.curentImagePosition + 1}</span>
+            <span>/ {this.state.totalImageCount}</span>
+          </div>
         </div>
         <div className="image"
             onClick={this.toggleZoom}
             >
           <img src={this.state.currentImageSRC} className={this.state.zoomImage && 'zoom'}/>
-        </div>
-        <div onClick={this.toNextImage} className="scroll-right scroll-button blackshadow">
-          <i className="fas fa-caret-right"></i>
-        </div>
-        <div className="image-counter blackshadow">
-          <span className="major-count">{this.state.curentImagePosition + 1}</span>
-          <span>/ {this.state.totalImageCount}</span>
         </div>
       </div>
     );
