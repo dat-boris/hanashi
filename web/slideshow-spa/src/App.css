@@ -22,6 +22,7 @@ body {
 
 .slideshow #image-inner.zoom {
   width: 300vw;
+  height: 200vw;
 }
 
 .slideshow #image-inner img {
