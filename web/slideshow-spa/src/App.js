@@ -24,12 +24,14 @@ class App extends Component {
       totalImageCount: 0,
       curentImagePosition: 0,
       imageList: [],
-      isShowQR: false
+      isShowQR: false,
+      zoomImage: false
     };
 
     this.toNextImage = this.toNextImage.bind(this);
     this.toPreviousImage = this.toPreviousImage.bind(this);
     this.toggleQRcode = this.toggleQRcode.bind(this);
+    this.toggleZoom = this.toggleZoom.bind(this);
 
     this.socket = new WebSocket(
       `ws://${HANASHI.WEB_SOCKET_HOST}/ws/s/${HANASHI.ROOM_NAME}/`
@@ -85,6 +87,10 @@ class App extends Component {
     this._sendUpdateState(newPosition);
   }
 
+  toggleZoom(){
+    this.setState({zoomImage: this.state.zoomImage ? '' : true})
+  }
+
   toggleQRcode(){
     this.setState({isShowQR: this.state.isShowQR ? '' : true})
   }
@@ -109,8 +115,10 @@ class App extends Component {
         <div onClick={this.toPreviousImage} className="scroll-left scroll-button blackshadow">
           <i className="fas fa-caret-left"></i>
         </div>
-        <div className="image">
-          <img src={this.state.currentImageSRC}/>
+        <div className="image"
+            onClick={this.toggleZoom}
+            >
+          <img src={this.state.currentImageSRC} className={this.state.zoomImage && 'zoom'}/>
         </div>
         <div onClick={this.toNextImage} className="scroll-right scroll-button blackshadow">
           <i className="fas fa-caret-right"></i>

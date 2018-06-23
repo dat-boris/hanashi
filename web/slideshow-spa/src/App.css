@@ -15,6 +15,10 @@
 }
 
 .slideshow .image img {
+  width: 100vh;
+}
+
+.slideshow .image img.zoom {
   height: 100vh;
 }
 
