@@ -102,6 +102,9 @@ class App extends Component {
   }
 
   _sendUpdateState(newPosition){
+    // unzoom image, but do not send to websocket
+    this.setState({zoomImage: false});
+
     const newState = {
       currentImageSRC: this.state.imageList[newPosition],
       curentImagePosition: newPosition
@@ -130,10 +133,12 @@ class App extends Component {
             <span>/ {this.state.totalImageCount}</span>
           </div>
         </div>
-        <div className="image"
+        <div id="image"
             onClick={this.toggleZoom}
             >
-          <img src={this.state.currentImageSRC} className={this.state.zoomImage && 'zoom'}/>
+          <div id="image-inner" className={this.state.zoomImage && 'zoom'}>
+            <img src={this.state.currentImageSRC} className={this.state.zoomImage && 'zoom'}/>
+          </div>
         </div>
       </div>
     );

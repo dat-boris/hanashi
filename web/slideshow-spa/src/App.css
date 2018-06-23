@@ -14,17 +14,23 @@ body {
   font-size: 6em;
 }
 
-.slideshow .image {
+.slideshow #image {
   float: left;
   overflow: scroll;
-}
-
-.slideshow .image img {
   width: 100vw;
 }
 
-.slideshow .image img.zoom {
-  height: 100vh;
+.slideshow #image-inner.zoom {
+  width: 300vw;
+}
+
+.slideshow #image-inner img {
+  width: 100vw;
+}
+
+.slideshow #image-inner img.zoom {
+  height: 100%;
+  width: 100%;
 }
 
 /**
