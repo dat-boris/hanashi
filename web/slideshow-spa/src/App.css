@@ -15,23 +15,21 @@ body {
 }
 
 .slideshow #image {
-  float: left;
   overflow: scroll;
   width: 100vw;
+  height: 100vh;
+  position: absolute;
 }
 
-.slideshow #image-inner.zoom {
-  width: 300vw;
-  height: 200vw;
+.slideshow #image-inner {
+  top: 50%;
+  transform: translate(-0%, -50%);
+  position: absolute;
 }
 
 .slideshow #image-inner img {
-  width: 100vw;
-}
-
-.slideshow #image-inner img.zoom {
-  height: 100%;
-  width: 100%;
+  height: auto;
+  width: 120vw;
 }
 
 /**

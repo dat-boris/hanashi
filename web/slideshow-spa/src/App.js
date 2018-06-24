@@ -31,7 +31,6 @@ class App extends Component {
     this.toNextImage = this.toNextImage.bind(this);
     this.toPreviousImage = this.toPreviousImage.bind(this);
     this.toggleQRcode = this.toggleQRcode.bind(this);
-    this.toggleZoom = this.toggleZoom.bind(this);
 
     this.socket = new WebSocket(
       `ws://${HANASHI.WEB_SOCKET_HOST}/ws/s/${HANASHI.ROOM_NAME}/`
@@ -93,10 +92,6 @@ class App extends Component {
     this._sendUpdateState(newPosition);
   }
 
-  toggleZoom(){
-    this.setState({zoomImage: this.state.zoomImage ? '' : true})
-  }
-
   toggleQRcode(){
     this.setState({isShowQR: this.state.isShowQR ? '' : true})
   }
@@ -116,6 +111,15 @@ class App extends Component {
   render() {
     return (
       <div className="slideshow">
+
+        <div id="image"
+            onClick={this.toggleZoom}
+            >
+          <div id="image-inner">
+            <img src={this.state.currentImageSRC}/>
+          </div>
+        </div>
+
         <div id="controls">
           <div onClick={this.toggleQRcode} className="share-widget">
             <i className="fas fa-qrcode"></i>
@@ -133,13 +137,7 @@ class App extends Component {
             <span>/ {this.state.totalImageCount}</span>
           </div>
         </div>
-        <div id="image"
-            onClick={this.toggleZoom}
-            >
-          <div id="image-inner" className={this.state.zoomImage && 'zoom'}>
-            <img src={this.state.currentImageSRC} className={this.state.zoomImage && 'zoom'}/>
-          </div>
-        </div>
+
       </div>
     );
   }
